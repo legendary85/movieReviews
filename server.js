@@ -36,9 +36,9 @@ app.get("/scrape", function (req, res) {
   axios.get("https://www.rottentomatoes.com/critics/latest_reviews").then(function (response) {
     // we load into cheerio and save it to $ for a shorthand selector
     var $ = cheerio.load(response.data);
+    var results = [];
     var reviewRows = $('.review_table table tbody tr');
     reviewRows.each(function (i, element) {
-      // var result = {};
       var rating = $(element).find('td:first-child').text();
       var movieTitle = $(element).find('td:nth-child(2)').text();
       var movieLink = 'https://www.rottentomatoes.com' + $(element).find('td:nth-child(2) a').attr('href');
@@ -46,18 +46,45 @@ app.get("/scrape", function (req, res) {
       var summaryText = summary.split('\n')[1];
       var summaryDate = summary.split('\n')[3].trim();
       var critic = $(element).find('td:nth-child(4)').text();
-      console.log('================== MOVIE ================');
-      console.log('rating', rating);
-      console.log('movie title', movieTitle.trim());
-      console.log('movie link', movieLink.trim());
-      console.log('summary', summary.trim());
-      console.log('summaryText', summaryText.trim());
-      console.log('summaryDate', summaryDate.trim());
-      console.log('critic', critic.trim());
+      //push data to result array
+      results.push({
+        rating: rating,
+        movieTitle: movieTitle,
+        movieLink: movieLink,
+        summary: summary,
+        summaryText: summaryText,
+        summaryDate: summaryDate,
+        critic: critic
+      })
 
-      //Create a new Article using the 
+      // var rating = $(element).find('td:first-child').text();
+      // var movieTitle = $(element).find('td:nth-child(2)').text();
+      // var movieLink = 'https://www.rottentomatoes.com' + $(element).find('td:nth-child(2) a').attr('href');
+      // var summary = $(element).find('td:nth-child(3)').text();
+      // var summaryText = summary.split('\n')[1];
+      // var summaryDate = summary.split('\n')[3].trim();
+      // var critic = $(element).find('td:nth-child(4)').text();
+      // console.log('================== MOVIE ================');
+      // console.log('rating', rating);
+      // console.log('movie title', movieTitle.trim());
+      // console.log('movie link', movieLink.trim());
+      // console.log('summary', summary.trim());
+      // console.log('summaryText', summaryText.trim());
+      // console.log('summaryDate', summaryDate.trim());
+      // console.log('critic', critic.trim());
+
+
+      // //Create a new Article using the 
+      // db.Article.create(result).then(function (dbArticle) {
+      //   res.json(dbArticle);
+      // })
+      //   .then(function (err) {
+      //     console.log(err)
+      //   })
     });
-    res.render("Scrape Complete")
+    //Send message to client
+    // res.render("Scrape Complete")
+    console.log(results)
   })
 })
 
