@@ -4,7 +4,16 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 var ArticleSchema = new Schema({
-  headline: {
+  rating: {
+    type: String,
+    required: true
+  },
+  movieTitle: {
+    type: String,
+    required: true
+  },
+  //link is required and of type string
+  movieLink: {
     type: String,
     required: true
   },
@@ -12,8 +21,11 @@ var ArticleSchema = new Schema({
     type: String,
     required: true
   },
-  //link is required and of type string
-  link: {
+  summaryText: {
+    type: String,
+    required: true
+  },
+  critic: {
     type: String,
     required: true
   },
