@@ -26,7 +26,13 @@ module.exports = function (app) {
   });
 
 
-
+  // app.get("/reviews", function (req, res) {
+  //   db.Article.find({}).then(function (dbArticle) {
+  //     res.render("index", {
+  //       style: "home.css"
+  //     })
+  //   })
+  // })
 
 
   //A GET route for scraping the https://www.rottentomatoes.com/critics/latest_reviews
@@ -92,6 +98,7 @@ module.exports = function (app) {
                 db.Article.create(result)
                   .then(function (dbArticle) {
                     console.log("Data Entered")
+                    res.json(results);
                     // console.log(dbArticle)
                   })
                   .catch(function (err) {
@@ -111,7 +118,7 @@ module.exports = function (app) {
     });
   })
 
-  app.get("/reviews", function (req, res) {
+  app.get("/api/reviews", function (req, res) {
     //to find all reviews
     db.Article.find({}).then(function (dbArticle) {
       res.json(dbArticle)
@@ -132,7 +139,7 @@ module.exports = function (app) {
   app.put("/api/reviews/:id", function (req, res) {
     var saved = req.body.saved == 'true'
     if (saved) {
-      db.Article.updateOne({ _id: req.body._id }, { $set: { sved: true } }, function (err, result) {
+      db.Article.updateOne({ _id: req.body._id }, { $set: { saved: true } }, function (err, result) {
         if (err) {
           console.log(err)
         } else {
@@ -152,6 +159,12 @@ module.exports = function (app) {
         return res.send(true)
       }
     });
+  })
+
+
+  //notes
+  app.post('/articles/id/:id', function (req, res) {
+    db.Note
   })
 
 }

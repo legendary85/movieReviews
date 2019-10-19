@@ -17,7 +17,6 @@
       </li>
       <li class="nav-item">
         <a class="btn btn-danger clear">CLEAR ARTICLES!</a>
-        <button class="click">click</button>
       </li>
     </ul>
   </div>
@@ -36,18 +35,23 @@
 {{!-- Movie Review Data goes here  --}}
 {{!-- Cards with save button --}}
 <div class="container-fluid article-container">
-  <div class="card">
-    <div class="car-header">
-      <h3>
-        <a href="" class="article-link"></a>
-        <a class="btn btn-success save">Save Article</a>
-      </h3>
-    </div>
-    <div class="card-body"></div>
+  {{#if article}}
+  {{#each article}}
+  <div data-_id={{this._id}} class="card"></div>
+  <div class="car-header">
+    <h3>
+      <button type="button" id="save-button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+        data-whatever="@mdo">Save Article</button>
+      {{!-- <a class="btn btn-success save">Save Article</a> --}}
+      <a class="article-link" target="_blank" rel="noopener noreferrer" href={{this.reviewLink}}>{{this.movieTitle}}</a>
+    </h3>
   </div>
-  {{!-- /each --}}
+  <div class="card-body">{{this.review}}</div>
 </div>
-{{!-- each --}}
+{{/each}}
+{{!-- /each --}}
+</div>
+{{else}}
 <div class="alert alert-warning text-center">
   <h4>No New Articles</h4>
 </div>
@@ -64,6 +68,37 @@
     </h4>
   </div>
 </div>
+{{/if}}
+{{!-- Modal --}}
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Title of Note</label>
+            <input type="text" class="form-control" id="recipient-name">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Leave a Note</label>
+            <textarea class="form-control" id="message-text"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save Article</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
@@ -74,4 +109,5 @@
   </div>
 </footer>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="/js/index.js"></script>
+{{!-- <script src="/js/index.js"></script> --}}
+<script src="/js/articles.js"></script>

@@ -1,4 +1,4 @@
-
+/* 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -20,7 +20,7 @@ time, mark, audio, video {
 	vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
+/* article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
@@ -41,7 +41,7 @@ q:before, q:after {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
-}
+/* } */ 
 
 
 /* ========================= */
@@ -105,3 +105,54 @@ body{
   left:0;
 
 } */
+
+.jumbotron p {
+  font-size: 30px;
+}
+
+.article-container {
+  padding-bottom: 25px;
+}
+
+.card {
+  border-radius: 0;
+  box-shadow: 3px 3px 20px lightslategrey;
+  margin: 20px 0;
+}
+
+.card .card-header {
+  background-color: #2196f3;
+  position: relative;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.card .card-header h3 {
+  color: white;
+}
+
+.card .card-header .btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.card .card-header .btn.delete {
+  right: 160px;
+}
+
+.card .card-body {
+  font-size: 16px;
+}
+
+.card .card-header .article-link {
+  color: white;
+  display: inline-block;
+  width: 80%;
+}
+.save{
+  margin-left: 20px;
+  margin-right: 20px;
+  padding: 15px;
+  color: white !important;
+}

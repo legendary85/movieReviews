@@ -11,7 +11,7 @@ $.getJSON("/articles", function (data) {
 app.get("/reviews", function (req, res) {
   db.Article.find({}).then(function (dbArticle) {
     res.render("index", {
-      style: "index.css"
+      style: "home.css"
     })
   })
 })
