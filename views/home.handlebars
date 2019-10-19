@@ -10,10 +10,14 @@
         <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/saved">Saved Articles</a>
+        <a class="nav-link" href="/saved">SAVED ARTICLES</a>
       </li>
       <li class="nav-item">
-        <a class="btn btn-danger scrape-new">SCRAPE NEW REVIEWS!</a>
+        <a class="btn btn-danger scrape-new">SCRAPE NEW ARTICLES!</a>
+      </li>
+      <li class="nav-item">
+        <a class="btn btn-danger clear">CLEAR ARTICLES!</a>
+        <button class="click">click</button>
       </li>
     </ul>
   </div>
@@ -28,15 +32,46 @@
     <p>Rotten Tomatoes Edition</p>
   </div>
 </div>
+
+{{!-- Movie Review Data goes here  --}}
+{{!-- Cards with save button --}}
 <div class="container-fluid article-container">
-  <d class="reviews"></d>
+  <div class="card">
+    <div class="car-header">
+      <h3>
+        <a href="" class="article-link"></a>
+        <a class="btn btn-success save">Save Article</a>
+      </h3>
+    </div>
+    <div class="card-body"></div>
+  </div>
+  {{!-- /each --}}
+</div>
+{{!-- each --}}
+<div class="alert alert-warning text-center">
+  <h4>No New Articles</h4>
+</div>
+<div class="card">
+  <div class="card-header text-center">
+    <h3>What would you like to do?</h3>
+  </div>
+  <div class="card-body text-center">
+    <h4>
+      <a class="new-scrape">Try Scraping New Articles</a>
+    </h4>
+    <h4>
+      <a href="/saved"> Go to saved Articles</a>
+    </h4>
+  </div>
 </div>
 
+
+
+{{!-- footer --}}
 <footer class="footer">
   <div class="container">
     <p>Rotten Tomatoes Mongo Scraper</p>
   </div>
 </footer>
-
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/js/index.js"></script>
-<script src="/controllers/api.js"></script>

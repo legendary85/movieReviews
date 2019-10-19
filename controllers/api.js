@@ -42,7 +42,7 @@ module.exports = function (app) {
 
         //add the text and href of every link and save them as properties of the result object
 
-        result.rating = $(this).children('td:first-child').text().replace(/(\r\n|\n|\r|\t|\s+)/gm, " ").trim();
+        // result.rating = $(this).children('td:first-child').text().replace(/(\r\n|\n|\r|\t|\s+)/gm, " ").trim();
         result.movieTitle = $(this).children('td:nth-child(2)').text().replace(/(\r\n|\n|\r|\t|\s+)/gm, " ").trim();
         result.review = $(this).children('td:nth-child(3)').text().replace(/(\r\n|\n|\r|\t|\s+)/gm, " ").trim();
         result.reviewLink = $(element).find('td:nth-child(3) a').attr('href');
@@ -74,7 +74,7 @@ module.exports = function (app) {
         // var summaryDate = summary.split('\n')[3].trim();
         // var critic = $(element).find('td:nth-child(4)').text();
         console.log('================== MOVIE ================');
-        console.log('rating', result.rating);
+        // console.log('rating', result.rating);
         console.log('movie title', result.movieTitle.trim());
         console.log('review', result.review.trim());
         console.log('review link', result.reviewLink);
