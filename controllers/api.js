@@ -10,29 +10,44 @@ var cheerio = require("cheerio");
 
 module.exports = function (app) {
 
-
-  // Main route renders homepage
-  // app.get("/", function (req, res) {
-  //   db.Article.find({ saved: false }, function (err, data) {
-  //     res.render("home", { home: true, style: "home.css", article: data });
-
-  //   })
-  // });
-  app.get("/", function (req, res) {
-    db.Article.find({}, function (err, data) {
-      res.render("home", { style: "home.css", article: data });
-
+  //Home Page
+  app.get('/', function (req, res) {
+    db.Article.find({ saved: false }, function (err, data) {
+      res.render('home', { home: home.css, article: data });
     })
   });
 
+  // saved pages
+  app.get('/saved', function (req, res) {
+    db.Article.find({ saved: true }, function (err, data) {
+      res.render('saved', { home: home.css, article: data });
+    })
+  });
 
-  // app.get("/reviews", function (req, res) {
-  //   db.Article.find({}).then(function (dbArticle) {
-  //     res.render("index", {
-  //       style: "home.css"
-  //     })
-  //   })
-  // })
+  //update article in db by the changed saved field to true
+
+  app.put('/api/reviews/:id', function (req, res) {
+    if (saved) {
+      db.Article.updateOne({ _id: req.body._id }, { $set: { saved: true } }, function (err, result) {
+        if (err) {
+          console.log(err)
+        } else {
+          return res.send(true)
+        }
+      })
+    }
+  })
+
+  //delete article form database
+  app.delete("/api/reviews/:id", function (req, res) {
+    db.Article.deleteOne({ _id: req.params.id }, function (err, result) {
+      if (err) {
+        console.log(err)
+      } else {
+        return res.send(true)
+      }
+    })
+  })
 
 
   //A GET route for scraping the https://www.rottentomatoes.com/critics/latest_reviews
@@ -118,53 +133,55 @@ module.exports = function (app) {
     });
   })
 
-  app.get("/api/reviews", function (req, res) {
-    //to find all reviews
-    db.Article.find({}).then(function (dbArticle) {
-      res.json(dbArticle)
-    }).catch(function (err) {
-      res.json(err)
-    })
+  //>>>>>>>>>>>>>NOTES>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-  })
-
-  //This route renders the saved handlebars page
-  app.get("/saved", function (req, res) {
-    db.Article.find({ saved: false }, function (err, data) {
-      res.render("saved", { home: false, article: data });
-    })
-  })
-
-  //save article to database  changed fied = true
-  app.put("/api/reviews/:id", function (req, res) {
-    var saved = req.body.saved == 'true'
-    if (saved) {
-      db.Article.updateOne({ _id: req.body._id }, { $set: { saved: true } }, function (err, result) {
-        if (err) {
-          console.log(err)
-        } else {
-          return res.send(true)
-        }
+  // get back all notes for a given article
+  app.get("/api/notes/:id", function (req, res) {
+    // res.send(true)
+    db.Article.findOne({ _id: req.params.id })
+      .populate("note")
+      .then(function (dbArticle) {
+        console.log(dbArticle.note)
+        res.json(dbArticle.note)
       })
-    }
+      .catch(function (err) {
+        res.json(err)
+      })
+  });
+
+  //add note to a article
+  app.post("/api/notes", function (req, res) {
+    console.log(req.body)
+    db.Note.create({ noteText: req.body.noteText }).then(function (dbNote) {
+      console.log('bdNote:' + dbNote)
+      return db.Article.findOneAndUpdate({ _id: req.body._movieTitleId },
+        { $push: { note: dbNote._id } },
+        { new: true })
+    })
   })
 
-  //delete Article form DB
-  app.delete("/api/reviews/:id", function (req, res) {
+  // delete note form article
+  app.delete("/api/notes/:id", function (req, res) {
     console.log('reqbody:' + JSON.stringify(req.params.id))
-    db.Article.deleteOne({ _id: req.params.id }, function (err, result) {
+    db.Note.deleteOne({ _id: req.params.id }, function (err, result) {
       if (err) {
         console.log(err)
       } else {
         return res.send(true)
       }
     });
-  })
+  });
 
-
-  //notes
-  app.post('/articles/id/:id', function (req, res) {
-    db.Note
-  })
-
+  // clear all articles from database
+  app.get("/api/clear", function (req, res) {
+    console.log(req.body)
+    db.Article.deleteMany({}, function (err, result) {
+      if (err) {
+        console.log(err)
+      } else {
+        console.log(result)
+        res.send(true)
+      }
+    })
+  });
 }
