@@ -50,7 +50,7 @@ $(document).ready(function () {
         $("<a class='article-link' target='_blank' rel='noopener noreferrer'>")
           .attr("href", article.reviewLink)
           .text(article.movieTitle),
-        $("<a class='btn btn-success save'>Save Article</a>")
+        $("<a class='btn btn-success save'>Save Article From JavaScript</a>")
       )
     )
     var cardBody = $("<div class='card-body'>").text(article.review);

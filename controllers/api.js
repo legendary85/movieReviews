@@ -13,20 +13,21 @@ module.exports = function (app) {
   //Home Page
   app.get('/', function (req, res) {
     db.Article.find({ saved: false }, function (err, data) {
-      res.render('home', { home: home.css, article: data });
+      res.render('home', { home: true, article: data });
     })
   });
 
   // saved pages
   app.get('/saved', function (req, res) {
     db.Article.find({ saved: true }, function (err, data) {
-      res.render('saved', { home: home.css, article: data });
+      res.render('saved', { home: false, article: data });
     })
   });
 
   //update article in db by the changed saved field to true
 
-  app.put('/api/reviews/:id', function (req, res) {
+  app.put("/api/headlines/:id", function (req, res) {
+    var saved = req.body.saved == 'true'
     if (saved) {
       db.Article.updateOne({ _id: req.body._id }, { $set: { saved: true } }, function (err, result) {
         if (err) {
@@ -34,12 +35,12 @@ module.exports = function (app) {
         } else {
           return res.send(true)
         }
-      })
+      });
     }
-  })
+  });
 
   //delete article form database
-  app.delete("/api/reviews/:id", function (req, res) {
+  app.delete("/api/headlines/:id", function (req, res) {
     db.Article.deleteOne({ _id: req.params.id }, function (err, result) {
       if (err) {
         console.log(err)
@@ -64,9 +65,9 @@ module.exports = function (app) {
         //add the text and href of every link and save them as properties of the result object
 
         // result.rating = $(this).children('td:first-child').text().replace(/(\r\n|\n|\r|\t|\s+)/gm, " ").trim();
-        result.movieTitle = $(this).children('td:nth-child(2)').text().replace(/(\r\n|\n|\r|\t|\s+)/gm, " ").trim();
-        result.review = $(this).children('td:nth-child(3)').text().replace(/(\r\n|\n|\r|\t|\s+)/gm, " ").trim();
-        result.reviewLink = $(element).find('td:nth-child(3) a').attr('href');
+        result.headline = $(this).children('td:nth-child(2)').text().replace(/(\r\n|\n|\r|\t|\s+)/gm, " ").trim();
+        result.summary = $(this).children('td:nth-child(3)').text().replace(/(\r\n|\n|\r|\t|\s+)/gm, " ").trim();
+        result.url = $(element).find('td:nth-child(3) a').attr('href');
 
 
         // var rating = $(element).find('td:first-child').text();
@@ -94,17 +95,17 @@ module.exports = function (app) {
         // var summaryText = summary.split('\n')[1];
         // var summaryDate = summary.split('\n')[3].trim();
         // var critic = $(element).find('td:nth-child(4)').text();
-        console.log('================== MOVIE ================');
-        // console.log('rating', result.rating);
-        console.log('movie title', result.movieTitle.trim());
-        console.log('review', result.review.trim());
-        console.log('review link', result.reviewLink);
+        // console.log('================== MOVIE ================');
+        // // console.log('rating', result.rating);
+        // console.log('movie title', result.movieTitle.trim());
+        // console.log('review', result.review.trim());
+        // console.log('review link', result.reviewLink);
         // console.log('summaryText', summaryText.trim());
         // console.log('summaryDate', summaryDate.trim());
         // console.log('critic', critic.trim());
 
-        if (result.movieTitle !== '' && result.reviewLink !== '') {
-          db.Article.findOne({ movieTitle: result.movieTitle }, function (err, data) {
+        if (result.headline !== '' && result.url !== '') {
+          db.Article.findOne({ headline: result.headline }, function (err, data) {
             if (err) {
               console.log(err)
             } else {
@@ -112,9 +113,9 @@ module.exports = function (app) {
                 console.log("Data is null and not entered")
                 db.Article.create(result)
                   .then(function (dbArticle) {
-                    console.log("Data Entered")
-                    res.json(results);
-                    // console.log(dbArticle)
+                    console.log("Data Entered" + result)
+                    // res.json(result);
+                    console.log(dbArticle)
                   })
                   .catch(function (err) {
 
@@ -154,7 +155,7 @@ module.exports = function (app) {
     console.log(req.body)
     db.Note.create({ noteText: req.body.noteText }).then(function (dbNote) {
       console.log('bdNote:' + dbNote)
-      return db.Article.findOneAndUpdate({ _id: req.body._movieTitleId },
+      return db.Article.findOneAndUpdate({ _id: req.body._headlineId },
         { $push: { note: dbNote._id } },
         { new: true })
     })

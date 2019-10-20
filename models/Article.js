@@ -5,16 +5,16 @@ var Schema = mongoose.Schema;
 
 var ArticleSchema = new Schema({
 
-  movieTitle: {
+  headline: {
     type: String,
     required: true
   },
   //link is required and of type string
-  reviewLink: {
+  url: {
     type: String,
     required: true
   },
-  review: {
+  summary: {
     type: String,
     required: true
   },
