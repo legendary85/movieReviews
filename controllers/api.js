@@ -9,7 +9,9 @@ var cheerio = require("cheerio");
 //Routes
 
 module.exports = function (app) {
-
+  //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  //The only routes where hadlebars will render data
+  //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
   //Home Page
   app.get('/', function (req, res) {
     db.Article.find({ saved: false }, function (err, data) {
@@ -23,6 +25,10 @@ module.exports = function (app) {
       res.render('saved', { home: false, article: data });
     })
   });
+
+  //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  //All api routes below
+  //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
   //update article in db by the changed saved field to true
 

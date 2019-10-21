@@ -48,25 +48,25 @@ $(document).ready(function () {
   }
 
 
-  function renderEmpty() {
-    var emptyAlert = $(
-      [
-        "<div class='alert alert-warning text-center'>",
-        "<h4>No New Articles Yet!</h4>",
-        "</div>",
-        "<div class='card'>",
-        "<div class='card-header text-center'>",
-        "<h3>What Would You Like To Do?</h3>",
-        "</div>",
-        "<div class='card-body text-center'>",
-        "<h4><a class='scrape-new'>Try Scraping New Articles</a></h4>",
-        "<h4><a href='/saved'>Go to Saved Articles</a></h4>",
-        "</div>",
-        "</div>"
-      ].join("")
-    )
-    appendContainer.append(emptyAlert)
-  }
+  // function renderEmpty() {
+  //   var emptyAlert = $(
+  //     [
+  //       "<div class='alert alert-warning text-center'>",
+  //       "<h4>No New Articles Yet!</h4>",
+  //       "</div>",
+  //       "<div class='card'>",
+  //       "<div class='card-header text-center'>",
+  //       "<h3>What Would You Like To Do?</h3>",
+  //       "</div>",
+  //       "<div class='card-body text-center'>",
+  //       "<h4><a class='scrape-new'>Try Scraping New Articles</a></h4>",
+  //       "<h4><a href='/saved'>Go to Saved Articles</a></h4>",
+  //       "</div>",
+  //       "</div>"
+  //     ].join("")
+  //   )
+  //   appendContainer.append(emptyAlert)
+  // }
 
   function renderNotesList(data) {
     var noteToRender = [];
@@ -151,9 +151,7 @@ $(document).ready(function () {
       // renderNotesList will populate the actual note HTML inside of the modal we just created/opened
       renderNotesList(noteData);
     });
-  } ß
-
-
+  }
 
 
   function handleNoteSave() {
@@ -170,7 +168,7 @@ $(document).ready(function () {
       noteData = { _headlineId: $(this).data("article")._id, noteText: newNote };
       $.post("/api/notes", noteData).then(function () {
         // When complete, close the modal
-        bootbox.hideAll();
+        bootbox.hideAll('hide');
       });
     }
   }

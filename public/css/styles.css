@@ -28,13 +28,13 @@ body {
 .jumbotron {
   position: relative;
   width: 100%;
-  height: 500px;
+  height: 400px;
   padding: 0;
   font-family: "Cormorant SC";
   box-shadow: 10px 5px 20px 2px lightslategrey;
 }
 
-.jumbotron .overlay {
+/* .jumbotron .overlay {
   position: absolute;
   top: 0;
   right: 0;
@@ -43,12 +43,14 @@ body {
   z-index: auto;
   background: linear-gradient(#333, black);
   opacity: 0.7;
-}
+} */
 
 .jumbotron .background-image {
   height: 100%;
   background-image: url("/img/movieR.jpg");
   background-size: cover;
+  background-position: 0 50%;
+  background-repeat: no-repeat;
 }
 
 .jumbotron .caption {
@@ -60,7 +62,7 @@ body {
 
 .jumbotron .caption h1,
 .jumbotron .caption p {
-  color: white;
+  color: #017bff;
 }
 
 .jumbotron h1 {
@@ -124,7 +126,10 @@ body {
   margin: 0;
   font-weight: 800;
   background: #0c7cd5;
+  text-align: center;
 }
+
+
 
 .navbar-nav > li > a.scrape-new,
 .navbar-nav > li > a.clear {
@@ -167,3 +172,4 @@ textarea {
   position: relative;
   bottom: 10px;
 }
+
