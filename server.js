@@ -2,7 +2,7 @@
 var express = require("express");
 var mongoose = require("mongoose");
 var exphbs = require("express-handlebars");
-var controller = require("./controllers/api")
+var controller = require("./controllers/api");
 // var bodyParser = require("body-parser")
 
 // scraping tools
@@ -18,15 +18,13 @@ var PORT = 3000;
 //Initialize Express
 var app = express();
 
-
-
 //Configure middleware
 // Use body-parser for handling form submissions
 // app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.engine('handlebars', exphbs({ defaultLayout: "main" }));
-app.set('view engine', 'handlebars');
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
 
 //Make public a startic folder
 app.use(express.static("public"));
@@ -37,15 +35,14 @@ controller(app);
 // app.use(router);
 
 //If deployed, use the deployed database. Otherwise us the local mongHeadlines database
-var db = process.env.MONGODB_URI || "mongodb://localhost/movieReviews"
+var db = process.env.MONGODB_URI || "mongodb://localhost/movieReviews";
 
 //Connect to the Mongo DB
-mongoose.connect(db, function (error) {
+mongoose.connect(db, function(error) {
   //Log any errors connecting with mongoose
   if (error) {
     console.log(error);
-  }
-  else {
+  } else {
     console.log("mongoose connection is successful");
   }
 });
@@ -98,8 +95,7 @@ mongoose.connect(db, function (error) {
 //       // console.log('summaryDate', summaryDate.trim());
 //       // console.log('critic', critic.trim());
 
-
-//       // //Create a new Article using the 
+//       // //Create a new Article using the
 //       // db.Article.create(result).then(function (dbArticle) {
 //       //   res.json(dbArticle);
 //       // })
@@ -113,8 +109,7 @@ mongoose.connect(db, function (error) {
 //   })
 // })
 
-
 //Start the server
-app.listen(PORT, function () {
+app.listen(PORT, function() {
   console.log(" 🌏 App running on port  " + PORT + "!");
 });
