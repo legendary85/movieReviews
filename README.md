@@ -28,17 +28,17 @@ Using an home-grown ORM, this app uses 4 basic CRUD functiond (http methods)
 1. The app is empty
    ![Home page](/screenshots/homepage.png)
 2. Click on scrape and 25 of the most recent articles will appear.
-   ![Home page](/homewitharticle.png)
+   ![Home page](/screenshots/homewitharticle.png)
 3. Click on the "Save Article" button.
 4. Click on "Saved Articles" button to see the article you've saved.
-   ![Home page](/savedarticles.png)
+   ![Home page](/screenshots/savedarticles.png)
 5. Click on Add a note button to write a comment.
-   ![Home page](/notes.png)
+   ![Home page](/screenshots/notes.png)
 6. Click saved.
-   ![Home page](/savedpage.png)
+   ![Home page](/screenshots/savedpage.png)
 7. Click delete to remove article
 8. Click clear button to clear the entire list of Articles.
-   ![Home page](/homepage.png)
+   ![Home page](/screenshots/homepage.png)
 
 ## Demo
 
