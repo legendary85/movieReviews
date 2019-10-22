@@ -26,7 +26,7 @@ This is an app that uses cheerio to scrape Rotten Tomatoes Movie Reviews section
 Using an home-grown ORM, this app uses 4 basic CRUD functiond (http methods)
 
 1. The app is empty
-   ![Home page](/homepage.png)
+   ![Home page](/screenshots/homepage.png)
 2. Click on scrape and 25 of the most recent articles will appear.
    ![Home page](/homewitharticle.png)
 3. Click on the "Save Article" button.

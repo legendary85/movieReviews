@@ -9,7 +9,7 @@ body {
 }
 
 .card a:not([href]):not([tabindex]).scrape-new {
-  color: #99b9dd;
+  color: red;
 }
 
 .footer {
@@ -63,16 +63,10 @@ body {
 
 .jumbotron .caption h1,
 .jumbotron .caption p {
- 
   -webkit-text-stroke: 1px black;
   color: #99b9dd;
-   text-shadow:
-       3px 3px 0 #000,
-     -1px -1px 0 #000,  
-      1px -1px 0 #000,
-      -1px 1px 0 #000,
-       1px 1px 0 #000;
-
+  text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000,
+    -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
 .jumbotron h1 {
@@ -139,7 +133,11 @@ body {
   text-align: center;
 }
 
-
+.navbar {
+  position: fixed;
+  z-index: 10;
+  width: 100%;
+}
 
 .navbar-nav > li > a.scrape-new,
 .navbar-nav > li > a.clear {
@@ -148,7 +146,6 @@ body {
   margin-left: 10px;
   font-weight: 800;
   color: #ffffff;
-  
 }
 
 .navbar-nav > li > a.scrape-new:hover,
@@ -183,4 +180,3 @@ textarea {
   position: relative;
   bottom: 10px;
 }
-
