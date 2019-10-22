@@ -38,14 +38,16 @@ controller(app);
 var db = process.env.MONGODB_URI || "mongodb://localhost/movieReviews";
 
 //Connect to the Mongo DB
-mongoose.connect(db, function(error) {
-  //Log any errors connecting with mongoose
-  if (error) {
-    console.log(error);
-  } else {
-    console.log("mongoose connection is successful");
-  }
-});
+// mongoose.connect(db, function(error) {
+//   //Log any errors connecting with mongoose
+//   if (error) {
+//     console.log(error);
+//   } else {
+//     console.log("mongoose connection is successful");
+//   }
+// });
+//Connect to the MongoDB with Heroku settings
+mongoose.connect(db);
 
 // app.get("/", function (req, res) {
 //   res.render("index");
